@@ -19,6 +19,7 @@ import { Route as LojaRouteImport } from './routes/loja'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as PlayersRouteImport } from './routes/players'
 import { Route as RankingRouteImport } from './routes/ranking'
+import { Route as LojaIndexRouteImport } from './routes/loja.index'
 import { Route as LojaProdutoRouteImport } from './routes/loja.$produto'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const RankingRoute = RankingRouteImport.update({
   path: '/ranking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LojaIndexRoute = LojaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LojaRoute,
+} as any)
 const LojaProdutoRoute = LojaProdutoRouteImport.update({
   id: '/$produto',
   path: '/$produto',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/players': typeof PlayersRoute
   '/ranking': typeof RankingRoute
   '/loja/$produto': typeof LojaProdutoRoute
+  '/loja/': typeof LojaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,11 +104,11 @@ export interface FileRoutesByTo {
   '/drops': typeof DropsRoute
   '/jornada': typeof JornadaRoute
   '/lives': typeof LivesRoute
-  '/loja': typeof LojaRouteWithChildren
   '/perfil': typeof PerfilRoute
   '/players': typeof PlayersRoute
   '/ranking': typeof RankingRoute
   '/loja/$produto': typeof LojaProdutoRoute
+  '/loja': typeof LojaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +123,7 @@ export interface FileRoutesById {
   '/players': typeof PlayersRoute
   '/ranking': typeof RankingRoute
   '/loja/$produto': typeof LojaProdutoRoute
+  '/loja/': typeof LojaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +139,7 @@ export interface FileRouteTypes {
     | '/players'
     | '/ranking'
     | '/loja/$produto'
+    | '/loja/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,11 +148,11 @@ export interface FileRouteTypes {
     | '/drops'
     | '/jornada'
     | '/lives'
-    | '/loja'
     | '/perfil'
     | '/players'
     | '/ranking'
     | '/loja/$produto'
+    | '/loja'
   id:
     | '__root__'
     | '/'
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/players'
     | '/ranking'
     | '/loja/$produto'
+    | '/loja/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -244,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RankingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/loja/': {
+      id: '/loja/'
+      path: '/'
+      fullPath: '/loja/'
+      preLoaderRoute: typeof LojaIndexRouteImport
+      parentRoute: typeof LojaRoute
+    }
     '/loja/$produto': {
       id: '/loja/$produto'
       path: '/$produto'
@@ -256,10 +273,12 @@ declare module '@tanstack/react-router' {
 
 interface LojaRouteChildren {
   LojaProdutoRoute: typeof LojaProdutoRoute
+  LojaIndexRoute: typeof LojaIndexRoute
 }
 
 const LojaRouteChildren: LojaRouteChildren = {
   LojaProdutoRoute: LojaProdutoRoute,
+  LojaIndexRoute: LojaIndexRoute,
 }
 
 const LojaRouteWithChildren = LojaRoute._addFileChildren(LojaRouteChildren)

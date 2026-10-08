@@ -10,33 +10,176 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
+import { Route as DropsRouteImport } from './routes/drops'
+import { Route as JornadaRouteImport } from './routes/jornada'
+import { Route as LivesRouteImport } from './routes/lives'
+import { Route as LojaRouteImport } from './routes/loja'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PlayersRouteImport } from './routes/players'
+import { Route as RankingRouteImport } from './routes/ranking'
+import { Route as LojaIndexRouteImport } from './routes/loja.index'
+import { Route as LojaProdutoRouteImport } from './routes/loja.$produto'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DropsRoute = DropsRouteImport.update({
+  id: '/drops',
+  path: '/drops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JornadaRoute = JornadaRouteImport.update({
+  id: '/jornada',
+  path: '/jornada',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LivesRoute = LivesRouteImport.update({
+  id: '/lives',
+  path: '/lives',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LojaRoute = LojaRouteImport.update({
+  id: '/loja',
+  path: '/loja',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayersRoute = PlayersRouteImport.update({
+  id: '/players',
+  path: '/players',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RankingRoute = RankingRouteImport.update({
+  id: '/ranking',
+  path: '/ranking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LojaIndexRoute = LojaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LojaRoute,
+} as any)
+const LojaProdutoRoute = LojaProdutoRouteImport.update({
+  id: '/$produto',
+  path: '/$produto',
+  getParentRoute: () => LojaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/drops': typeof DropsRoute
+  '/jornada': typeof JornadaRoute
+  '/lives': typeof LivesRoute
+  '/loja': typeof LojaRouteWithChildren
+  '/perfil': typeof PerfilRoute
+  '/players': typeof PlayersRoute
+  '/ranking': typeof RankingRoute
+  '/loja/$produto': typeof LojaProdutoRoute
+  '/loja/': typeof LojaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/drops': typeof DropsRoute
+  '/jornada': typeof JornadaRoute
+  '/lives': typeof LivesRoute
+  '/perfil': typeof PerfilRoute
+  '/players': typeof PlayersRoute
+  '/ranking': typeof RankingRoute
+  '/loja/$produto': typeof LojaProdutoRoute
+  '/loja': typeof LojaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/drops': typeof DropsRoute
+  '/jornada': typeof JornadaRoute
+  '/lives': typeof LivesRoute
+  '/loja': typeof LojaRouteWithChildren
+  '/perfil': typeof PerfilRoute
+  '/players': typeof PlayersRoute
+  '/ranking': typeof RankingRoute
+  '/loja/$produto': typeof LojaProdutoRoute
+  '/loja/': typeof LojaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/como-funciona'
+    | '/drops'
+    | '/jornada'
+    | '/lives'
+    | '/loja'
+    | '/perfil'
+    | '/players'
+    | '/ranking'
+    | '/loja/$produto'
+    | '/loja/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/como-funciona'
+    | '/drops'
+    | '/jornada'
+    | '/lives'
+    | '/perfil'
+    | '/players'
+    | '/ranking'
+    | '/loja/$produto'
+    | '/loja'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/como-funciona'
+    | '/drops'
+    | '/jornada'
+    | '/lives'
+    | '/loja'
+    | '/perfil'
+    | '/players'
+    | '/ranking'
+    | '/loja/$produto'
+    | '/loja/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  ComoFuncionaRoute: typeof ComoFuncionaRoute
+  DropsRoute: typeof DropsRoute
+  JornadaRoute: typeof JornadaRoute
+  LivesRoute: typeof LivesRoute
+  LojaRoute: typeof LojaRouteWithChildren
+  PerfilRoute: typeof PerfilRoute
+  PlayersRoute: typeof PlayersRoute
+  RankingRoute: typeof RankingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +191,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-funciona': {
+      id: '/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof ComoFuncionaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/drops': {
+      id: '/drops'
+      path: '/drops'
+      fullPath: '/drops'
+      preLoaderRoute: typeof DropsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jornada': {
+      id: '/jornada'
+      path: '/jornada'
+      fullPath: '/jornada'
+      preLoaderRoute: typeof JornadaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lives': {
+      id: '/lives'
+      path: '/lives'
+      fullPath: '/lives'
+      preLoaderRoute: typeof LivesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loja': {
+      id: '/loja'
+      path: '/loja'
+      fullPath: '/loja'
+      preLoaderRoute: typeof LojaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/players': {
+      id: '/players'
+      path: '/players'
+      fullPath: '/players'
+      preLoaderRoute: typeof PlayersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ranking': {
+      id: '/ranking'
+      path: '/ranking'
+      fullPath: '/ranking'
+      preLoaderRoute: typeof RankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loja/': {
+      id: '/loja/'
+      path: '/'
+      fullPath: '/loja/'
+      preLoaderRoute: typeof LojaIndexRouteImport
+      parentRoute: typeof LojaRoute
+    }
+    '/loja/$produto': {
+      id: '/loja/$produto'
+      path: '/$produto'
+      fullPath: '/loja/$produto'
+      preLoaderRoute: typeof LojaProdutoRouteImport
+      parentRoute: typeof LojaRoute
+    }
   }
 }
 
+interface LojaRouteChildren {
+  LojaProdutoRoute: typeof LojaProdutoRoute
+  LojaIndexRoute: typeof LojaIndexRoute
+}
+
+const LojaRouteChildren: LojaRouteChildren = {
+  LojaProdutoRoute: LojaProdutoRoute,
+  LojaIndexRoute: LojaIndexRoute,
+}
+
+const LojaRouteWithChildren = LojaRoute._addFileChildren(LojaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  ComoFuncionaRoute: ComoFuncionaRoute,
+  DropsRoute: DropsRoute,
+  JornadaRoute: JornadaRoute,
+  LivesRoute: LivesRoute,
+  LojaRoute: LojaRouteWithChildren,
+  PerfilRoute: PerfilRoute,
+  PlayersRoute: PlayersRoute,
+  RankingRoute: RankingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

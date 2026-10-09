@@ -19,8 +19,10 @@ export const initialState: RewardsState = {
  products:initialProducts,
  transactions:[
  {id:'tx1',userId:'demo-player',amount:100,reason:'Live WeLoveMMO · 60 minutos (demo)',date:'2026-10-08T01:00:00Z',idempotencyKey:'seed-1',actor:'demo-seed'},
- {id:'tx2',userId:'demo-player',amount:250,reason:'Evento especial (demo)',date:'2026-10-07T21:00:00Z',idempotencyKey:'seed-2',actor:'demo-seed'},
+ {id:'tx2',userId:'demo-player',amount:250,reason:'Evento especial (demo)',date:'2026-10-08T00:30:00Z',idempotencyKey:'seed-2',actor:'demo-seed'},
+ {id:'tx4',userId:'demo-player',amount:500,reason:'Bônus de jornada (demo)',date:'2026-10-08T00:00:00Z',idempotencyKey:'seed-4',actor:'demo-seed'},
  {id:'tx3',userId:'demo-player',amount:-5000,reason:'Resgate histórico · Mouse Gamer (preço demo anterior)',date:'2026-10-06T18:00:00Z',idempotencyKey:'seed-3',actor:'demo-seed'},
+ {id:'tx0',userId:'demo-player',amount:16600,reason:'Saldo acumulado inicial (demo)',date:'2026-10-05T18:00:00Z',idempotencyKey:'seed-opening',actor:'demo-seed'},
  ],
  sessions:[{id:'ws1',userId:'demo-player',streamId:'wl-main',minutes:402,source:'demo',verified:false}],redemptions:[],
 };

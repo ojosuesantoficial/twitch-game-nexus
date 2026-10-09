@@ -32,13 +32,14 @@ describe('WeLoveMMO Rewards Engine — demo boundaries', () => {
     expect(next.wallet.balance).toBe(7450);
     expect(next.products.find(p=>p.id==='special')?.stock).toBe(19);
     expect(next.redemptions).toHaveLength(1);
-    expect(next.transactions[0].actor).toBe('demo-player');
+    expect(next.transactions[0]?.actor).toBe('demo-player');
     expect(()=>engine.redeem(next,'special','redemption-test')).toThrow();
     expect(initialState.wallet.balance).toBe(12450);
   });
   it('rejects insufficient balance, inactive rewards and invalid catalog values', () => {
     expect(()=>engine.redeem(initialState,'gpu','too-expensive')).toThrow();
     const product=initialState.products[0];
+    if(!product) throw new Error('Missing demo product');
     const inactive=engine.saveProduct(initialState,{...product,active:false});
     expect(()=>engine.redeem(inactive,product.id,'inactive')).toThrow();
     expect(()=>engine.saveProduct(initialState,{...product,price:-1})).toThrow();

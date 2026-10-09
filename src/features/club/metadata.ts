@@ -1,1 +1,0 @@
-export function clubHead(title:string, description:string) { return {meta:[{title:`${title} | WeLoveMMO Club`},{name:'description',content:description},{property:'og:title',content:`${title} | WeLoveMMO Club`},{property:'og:description',content:description},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}]}; }

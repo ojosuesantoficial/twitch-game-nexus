@@ -19,8 +19,11 @@ import { Route as LojaRouteImport } from './routes/loja'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as PlayersRouteImport } from './routes/players'
 import { Route as RankingRouteImport } from './routes/ranking'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as LojaIndexRouteImport } from './routes/loja.index'
 import { Route as LojaProdutoRouteImport } from './routes/loja.$produto'
+import { Route as ApiPublicTwitchCallbackRouteImport } from './routes/api/public/twitch/callback'
+import { Route as ApiPublicTwitchLoginRouteImport } from './routes/api/public/twitch/login'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -72,6 +75,11 @@ const RankingRoute = RankingRouteImport.update({
   path: '/ranking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LojaIndexRoute = LojaIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -81,6 +89,16 @@ const LojaProdutoRoute = LojaProdutoRouteImport.update({
   id: '/$produto',
   path: '/$produto',
   getParentRoute: () => LojaRoute,
+} as any)
+const ApiPublicTwitchCallbackRoute = ApiPublicTwitchCallbackRouteImport.update({
+  id: '/api/public/twitch/callback',
+  path: '/api/public/twitch/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTwitchLoginRoute = ApiPublicTwitchLoginRouteImport.update({
+  id: '/api/public/twitch/login',
+  path: '/api/public/twitch/login',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -94,8 +112,11 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof PerfilRoute
   '/players': typeof PlayersRoute
   '/ranking': typeof RankingRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/loja/$produto': typeof LojaProdutoRoute
   '/loja/': typeof LojaIndexRoute
+  '/api/public/twitch/callback': typeof ApiPublicTwitchCallbackRoute
+  '/api/public/twitch/login': typeof ApiPublicTwitchLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,8 +128,11 @@ export interface FileRoutesByTo {
   '/perfil': typeof PerfilRoute
   '/players': typeof PlayersRoute
   '/ranking': typeof RankingRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/loja/$produto': typeof LojaProdutoRoute
   '/loja': typeof LojaIndexRoute
+  '/api/public/twitch/callback': typeof ApiPublicTwitchCallbackRoute
+  '/api/public/twitch/login': typeof ApiPublicTwitchLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,8 +146,11 @@ export interface FileRoutesById {
   '/perfil': typeof PerfilRoute
   '/players': typeof PlayersRoute
   '/ranking': typeof RankingRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/loja/$produto': typeof LojaProdutoRoute
   '/loja/': typeof LojaIndexRoute
+  '/api/public/twitch/callback': typeof ApiPublicTwitchCallbackRoute
+  '/api/public/twitch/login': typeof ApiPublicTwitchLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -138,8 +165,11 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/players'
     | '/ranking'
+    | '/auth/callback'
     | '/loja/$produto'
     | '/loja/'
+    | '/api/public/twitch/callback'
+    | '/api/public/twitch/login'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -151,8 +181,11 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/players'
     | '/ranking'
+    | '/auth/callback'
     | '/loja/$produto'
     | '/loja'
+    | '/api/public/twitch/callback'
+    | '/api/public/twitch/login'
   id:
     | '__root__'
     | '/'
@@ -165,8 +198,11 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/players'
     | '/ranking'
+    | '/auth/callback'
     | '/loja/$produto'
     | '/loja/'
+    | '/api/public/twitch/callback'
+    | '/api/public/twitch/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -180,6 +216,9 @@ export interface RootRouteChildren {
   PerfilRoute: typeof PerfilRoute
   PlayersRoute: typeof PlayersRoute
   RankingRoute: typeof RankingRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
+  ApiPublicTwitchCallbackRoute: typeof ApiPublicTwitchCallbackRoute
+  ApiPublicTwitchLoginRoute: typeof ApiPublicTwitchLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -254,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RankingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/loja/': {
       id: '/loja/'
       path: '/'
@@ -267,6 +313,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/loja/$produto'
       preLoaderRoute: typeof LojaProdutoRouteImport
       parentRoute: typeof LojaRoute
+    }
+    '/api/public/twitch/callback': {
+      id: '/api/public/twitch/callback'
+      path: '/api/public/twitch/callback'
+      fullPath: '/api/public/twitch/callback'
+      preLoaderRoute: typeof ApiPublicTwitchCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/twitch/login': {
+      id: '/api/public/twitch/login'
+      path: '/api/public/twitch/login'
+      fullPath: '/api/public/twitch/login'
+      preLoaderRoute: typeof ApiPublicTwitchLoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -294,6 +354,9 @@ const rootRouteChildren: RootRouteChildren = {
   PerfilRoute: PerfilRoute,
   PlayersRoute: PlayersRoute,
   RankingRoute: RankingRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
+  ApiPublicTwitchCallbackRoute: ApiPublicTwitchCallbackRoute,
+  ApiPublicTwitchLoginRoute: ApiPublicTwitchLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

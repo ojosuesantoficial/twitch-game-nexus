@@ -14,6 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_log: {
+        Row: {
+          action: string
+          actor: string | null
+          created_at: string
+          details: Json | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+        }
+        Relationships: []
+      }
+      point_transactions: {
+        Row: {
+          actor: string
+          amount: number
+          created_at: string
+          id: string
+          idempotency_key: string
+          reason: string
+          user_id: string
+        }
+        Insert: {
+          actor: string
+          amount: number
+          created_at?: string
+          id?: string
+          idempotency_key: string
+          reason: string
+          user_id: string
+        }
+        Update: {
+          actor?: string
+          amount?: number
+          created_at?: string
+          id?: string
+          idempotency_key?: string
+          reason?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          active: boolean
+          id: string
+          name: string
+          price: number
+          stock: number
+        }
+        Insert: {
+          active?: boolean
+          id: string
+          name: string
+          price: number
+          stock: number
+        }
+        Update: {
+          active?: boolean
+          id?: string
+          name?: string
+          price?: number
+          stock?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -22,6 +100,8 @@ export type Database = {
           email: string | null
           id: string
           points: number
+          twitch_id: string | null
+          twitch_login: string | null
           updated_at: string
         }
         Insert: {
@@ -31,6 +111,8 @@ export type Database = {
           email?: string | null
           id: string
           points?: number
+          twitch_id?: string | null
+          twitch_login?: string | null
           updated_at?: string
         }
         Update: {
@@ -40,7 +122,74 @@ export type Database = {
           email?: string | null
           id?: string
           points?: number
+          twitch_id?: string | null
+          twitch_login?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      redemptions: {
+        Row: {
+          cost: number
+          created_at: string
+          id: string
+          pix_key: string
+          product_id: string
+          product_name: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          cost: number
+          created_at?: string
+          id?: string
+          pix_key: string
+          product_id: string
+          product_name: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          cost?: number
+          created_at?: string
+          id?: string
+          pix_key?: string
+          product_id?: string
+          product_name?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "redemptions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
@@ -49,10 +198,28 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      admin_adjust_points: {
+        Args: { _amount: number; _key: string; _reason: string; _user: string }
+        Returns: undefined
+      }
+      admin_review_redemption: {
+        Args: { _id: string; _status: string }
+        Returns: undefined
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      redeem_product: {
+        Args: { _pix_key: string; _product_id: string }
+        Returns: string
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -179,6 +346,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const

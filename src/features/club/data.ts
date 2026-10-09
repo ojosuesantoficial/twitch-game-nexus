@@ -1,9 +1,9 @@
-import mouse from '@/assets/products/mouse.jpg';
-import keyboard from '@/assets/products/keyboard.jpg';
-import headset from '@/assets/products/headset.jpg';
-import ssd from '@/assets/products/ssd.jpg';
-import gpu from '@/assets/products/gpu.jpg';
-import monitor from '@/assets/products/monitor.jpg';
+const mouse = 'https://placehold.co/512/1a1a1a/901763?text=Mouse';
+const keyboard = 'https://placehold.co/512/1a1a1a/901763?text=Teclado';
+const headset = 'https://placehold.co/512/1a1a1a/901763?text=Headset';
+const ssd = 'https://placehold.co/512/1a1a1a/901763?text=SSD';
+const gpu = 'https://placehold.co/512/1a1a1a/901763?text=GPU';
+const monitor = 'https://placehold.co/512/1a1a1a/901763?text=Monitor';
 import type { Product, RewardsState, Stream, ClubEvent } from './model';
 export const initialProducts: Product[] = [
  { id:'mouse', name:'Mouse Gamer SteelSeries', category:'Mouses', price:20000, stock:10, featured:true, active:true, image:mouse, description:'Precisão em cada movimento. Um upgrade para as suas próximas conquistas. Produto ilustrativo da demonstração; modelo e disponibilidade serão confirmados na loja real.' },
@@ -13,6 +13,9 @@ export const initialProducts: Product[] = [
  { id:'gpu', name:'Placa de Vídeo RTX', category:'Placas de vídeo', price:150000, stock:2, featured:false, active:true, image:gpu, description:'Sua próxima grande conquista. Placa de vídeo ilustrativa; modelo final ainda não definido.' },
  { id:'monitor', name:'Monitor Gamer 27”', category:'Monitores', price:65000, stock:4, featured:false, active:true, image:monitor, description:'Um novo horizonte para o seu setup. Monitor ilustrativo de 27 polegadas.' },
  { id:'special', name:'Drop Especial do Club', category:'Recompensas especiais', price:5000, stock:20, featured:false, active:true, image:mouse, description:'Recompensa de demonstração para experimentar um resgate com seu saldo atual. Não gera entrega, pedido ou prêmio real.' },
+ { id:'pix-100', name:'PIX R$ 100', category:'Recompensas especiais', price:100000, stock:5, featured:true, active:true, image:'https://project--98ca8037-882c-4cdf-9ed6-99ba5eaa409e-dev.lovable.app/api/public/ext-asset?id=5d73ddd9-1aec-4564-832b-b2c0c6b66515', description:'Resgate R$ 100 direto na sua conta via PIX.' },
+ { id:'pix-80', name:'PIX R$ 80', category:'Recompensas especiais', price:80000, stock:10, featured:false, active:true, image:'https://project--98ca8037-882c-4cdf-9ed6-99ba5eaa409e-dev.lovable.app/api/public/ext-asset?id=d8ae77d1-7e75-4ce6-a7d1-ce56edf53788', description:'Resgate R$ 80 direto na sua conta via PIX.' },
+ { id:'pix-30-sorteio', name:'Sorteio PIX R$ 30', category:'Recompensas especiais', price:3000, stock:999, featured:false, active:true, image:'https://project--98ca8037-882c-4cdf-9ed6-99ba5eaa409e-dev.lovable.app/api/public/ext-asset?id=50bc37b0-773e-45b0-b6a9-4c9d1462f060', description:'Participe do sorteio de um PIX de R$ 30. Cada resgate é uma chance extra!' },
 ];
 export const initialState: RewardsState = {
  wallet:{userId:'demo-player',balance:12450,earned:17450,spent:5000},

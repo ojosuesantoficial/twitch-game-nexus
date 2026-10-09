@@ -1,18 +1,11 @@
-import mouse from '@/assets/products/mouse.jpg';
-import keyboard from '@/assets/products/keyboard.jpg';
-import headset from '@/assets/products/headset.jpg';
-import ssd from '@/assets/products/ssd.jpg';
-import gpu from '@/assets/products/gpu.jpg';
-import monitor from '@/assets/products/monitor.jpg';
+import pix30 from '@/assets/products/pix-30.jpg.asset.json';
+import pix80 from '@/assets/products/pix-80.jpg.asset.json';
+import pix100 from '@/assets/products/pix-100.jpg.asset.json';
 import type { Product, RewardsState, Stream, ClubEvent } from './model';
 export const initialProducts: Product[] = [
- { id:'mouse', name:'Mouse Gamer SteelSeries', category:'Mouses', price:20000, stock:10, featured:true, active:true, image:mouse, description:'Precisão em cada movimento. Um upgrade para as suas próximas conquistas. Produto ilustrativo da demonstração; modelo e disponibilidade serão confirmados na loja real.' },
- { id:'keyboard', name:'Teclado Mecânico RGB', category:'Teclados', price:30000, stock:8, featured:false, active:true, image:keyboard, description:'Cada comando faz a diferença. Teclado mecânico com iluminação RGB. Imagem e especificações ilustrativas.' },
- { id:'headset', name:'Headset Gamer Pro', category:'Headsets', price:25000, stock:6, featured:false, active:true, image:headset, description:'Ouça cada detalhe da sua próxima aventura. Headset gamer ilustrativo, sem estoque físico confirmado.' },
- { id:'ssd', name:'SSD NVMe 1 TB', category:'SSDs', price:40000, stock:5, featured:false, active:true, image:ssd, description:'Menos espera, mais jogo. SSD NVMe ilustrativo para demonstrar a jornada de recompensas.' },
- { id:'gpu', name:'Placa de Vídeo RTX', category:'Placas de vídeo', price:150000, stock:2, featured:false, active:true, image:gpu, description:'Sua próxima grande conquista. Placa de vídeo ilustrativa; modelo final ainda não definido.' },
- { id:'monitor', name:'Monitor Gamer 27”', category:'Monitores', price:65000, stock:4, featured:false, active:true, image:monitor, description:'Um novo horizonte para o seu setup. Monitor ilustrativo de 27 polegadas.' },
- { id:'special', name:'Drop Especial do Club', category:'Recompensas especiais', price:5000, stock:20, featured:false, active:true, image:mouse, description:'Recompensa de demonstração para experimentar um resgate com seu saldo atual. Não gera entrega, pedido ou prêmio real.' },
+ { id:'pix-30', name:'Sorteio PIX R$30', category:'Recompensas especiais', price:100000, stock:50, featured:true, active:true, image:pix30.url, description:'Participe do sorteio de um PIX de R$30. Pagamento revisado e enviado manualmente pela equipe WeLoveMMO.' },
+ { id:'pix-80', name:'PIX R$80', category:'Recompensas especiais', price:150000, stock:20, featured:false, active:true, image:pix80.url, description:'Resgate um PIX de R$80. Pagamento revisado e enviado manualmente pela equipe WeLoveMMO.' },
+ { id:'pix-100', name:'PIX R$100', category:'Recompensas especiais', price:190000, stock:20, featured:false, active:true, image:pix100.url, description:'Resgate um PIX de R$100. Pagamento revisado e enviado manualmente pela equipe WeLoveMMO.' },
 ];
 export const initialState: RewardsState = {
  wallet:{userId:'demo-player',balance:12450,earned:17450,spent:5000},

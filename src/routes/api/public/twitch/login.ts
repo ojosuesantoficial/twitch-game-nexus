@@ -13,7 +13,8 @@ export const Route = createFileRoute("/api/public/twitch/login")({
         auth.searchParams.set("client_id", clientId);
         auth.searchParams.set("redirect_uri", redirectUri);
         auth.searchParams.set("response_type", "code");
-        auth.searchParams.set("scope", "user:read:email");
+        auth.searchParams.set("scope", "openid user:read:email");
+        auth.searchParams.set("claims", JSON.stringify({ userinfo: { email: null, email_verified: null } }));
         auth.searchParams.set("state", state);
         return new Response(null, {
           status: 302,

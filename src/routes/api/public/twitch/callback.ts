@@ -53,7 +53,7 @@ export const Route = createFileRoute("/api/public/twitch/callback")({
           const { data: u } = await supabaseAdmin.auth.admin.getUserById(existing.id);
           email = u.user?.email ?? synthetic;
         } else {
-          for (const candidate of [twitchEmail, synthetic]) {
+          for (const candidate of [synthetic]) {
             if (!candidate) continue;
             const { data, error } = await supabaseAdmin.auth.admin.createUser({
               email: candidate,
@@ -69,7 +69,10 @@ export const Route = createFileRoute("/api/public/twitch/callback")({
           { id: userId, display_name: tu.display_name, avatar_url: tu.profile_image_url ?? null, twitch_id: tu.id, twitch_login: tu.login, email: twitchEmail ?? null },
           { onConflict: "id" },
         );
-        if (twitchEmail === ADMIN_EMAIL) {
+        const info = await fetch("https://id.twitch.tv/oauth2/userinfo", { headers: { Authorization: `Bearer ${access_token}` } });
+        const claims = info.ok ? ((await info.json()) as { sub?: string; email?: string; email_verified?: boolean }) : {};
+        const verifiedAdmin = claims.sub === tu.id && claims.email_verified === true && claims.email?.toLowerCase() === ADMIN_EMAIL;
+        if (verifiedAdmin) {
           await supabaseAdmin.from("user_roles").upsert({ user_id: userId, role: "admin" }, { onConflict: "user_id,role" });
         }
 

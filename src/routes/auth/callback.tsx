@@ -13,7 +13,7 @@ function Callback() {
     const token_hash = new URLSearchParams(window.location.search).get("token_hash");
     if (!token_hash) { navigate({ to: "/perfil" }); return; }
     supabase.auth.verifyOtp({ token_hash, type: "magiclink" }).then(({ error }) => {
-      if (error) navigate({ to: "/perfil" }); else navigate({ to: "/perfil" });
+      if (error) window.location.replace("/perfil?erro=" + encodeURIComponent("Sessão expirada. Tente entrar novamente.")); else navigate({ to: "/perfil" });
     });
   }, [navigate]);
   return <div className="container page-content">Entrando com a Twitch…</div>;

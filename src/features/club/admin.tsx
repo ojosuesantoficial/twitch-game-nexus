@@ -11,7 +11,7 @@ interface AdminRedemption { id: string; user_id: string; product_name: string; c
 interface AdminProfile { id: string; display_name: string; twitch_login: string | null; points: number }
 
 export function AdminPage() {
- const { user, isAdmin, ready, refresh } = useClub();
+ const { user, isAdmin, ready, refresh, products } = useClub();
  const [tab, setTab] = useState<'resgates' | 'points' | 'produtos'>('resgates');
  const [redemptions, setRedemptions] = useState<AdminRedemption[] | null>(null);
  const [profiles, setProfiles] = useState<AdminProfile[] | null>(null);
@@ -55,7 +55,6 @@ export function AdminPage() {
   if (err) setError(err.message); else { setMessage('Produto atualizado.'); await refresh(); }
  }
 
- const { products } = useClub();
  const pending = (redemptions ?? []).filter(r => r.status === 'pending');
 
  return <div className="container page-content"><PageHeading eyebrow="CENTRAL DE OPERAÇÕES" title="Painel Administrativo" description="Dados reais do Club. Toda ação fica registrada na auditoria."/><DemoNotice>Pagamentos PIX são enviados manualmente por você após marcar o resgate como pago.</DemoNotice>

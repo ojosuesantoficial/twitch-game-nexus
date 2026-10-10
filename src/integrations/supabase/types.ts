@@ -136,6 +136,7 @@ export type Database = {
           pix_key: string
           product_id: string
           product_name: string
+          request_key: string | null
           reviewed_at: string | null
           reviewed_by: string | null
           status: string
@@ -148,6 +149,7 @@ export type Database = {
           pix_key: string
           product_id: string
           product_name: string
+          request_key?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           status?: string
@@ -160,6 +162,7 @@ export type Database = {
           pix_key?: string
           product_id?: string
           product_name?: string
+          request_key?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           status?: string
@@ -206,12 +209,29 @@ export type Database = {
         Args: { _id: string; _status: string }
         Returns: undefined
       }
+      admin_set_product: {
+        Args: { _active: boolean; _id: string; _stock: number }
+        Returns: undefined
+      }
+      club_members: {
+        Args: { _limit: number; _ranked_only: boolean }
+        Returns: {
+          avatar_url: string
+          display_name: string
+          points: number
+          twitch_login: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      redeem_pix: {
+        Args: { _pix_key: string; _product_id: string; _request_key: string }
+        Returns: string
       }
       redeem_product: {
         Args: { _pix_key: string; _product_id: string }

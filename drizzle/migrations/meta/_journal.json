@@ -8,6 +8,13 @@
       "when": 1791514862902,
       "tag": "0000_twitch_wallet_redemptions",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791594412319,
+      "tag": "0001_harden_wallet_and_public_ranking",
+      "breakpoints": true
     }
   ]
 }

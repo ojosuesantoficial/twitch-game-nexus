@@ -18,7 +18,7 @@ export function AdminPage() {
  }, []);
  useEffect(() => { if (isAdmin) void load(); }, [isAdmin, load]);
 
- async function review(id: string, status: 'approved' | 'rejected') {
+ async function review(id: string, status: 'paid' | 'rejected') {
   const { error } = await supabase.rpc('admin_review_redemption', { _id: id, _status: status });
   setMsg(error ? error.message : 'Resgate atualizado.'); await load();
  }
@@ -35,7 +35,7 @@ export function AdminPage() {
   {msg && <p>{msg}</p>}
   <h2>Resgates</h2>
   {rows.length === 0 ? <p>Nenhum resgate ainda.</p> : <table><thead><tr><th>Data</th><th>Recompensa</th><th>Custo</th><th>Chave PIX</th><th>Status</th><th /></tr></thead><tbody>
-   {rows.map(r => <tr key={r.id}><td>{new Date(r.created_at).toLocaleString('pt-BR')}</td><td>{r.product_name}</td><td>{points(r.cost)}</td><td>{r.pix_key}</td><td>{r.status}</td><td>{r.status === 'pending' && <><Button size="sm" onClick={() => review(r.id, 'approved')}>Aprovar</Button> <Button size="sm" variant="secondary" onClick={() => review(r.id, 'rejected')}>Recusar</Button></>}</td></tr>)}
+   {rows.map(r => <tr key={r.id}><td>{new Date(r.created_at).toLocaleString('pt-BR')}</td><td>{r.product_name}</td><td>{points(r.cost)}</td><td>{r.pix_key}</td><td>{r.status}</td><td>{r.status === 'pending' && <><Button size="sm" onClick={() => review(r.id, 'paid')}>Marcar PIX pago</Button> <Button size="sm" variant="secondary" onClick={() => review(r.id, 'rejected')}>Recusar</Button></>}</td></tr>)}
   </tbody></table>}
   <h2>Recompensas</h2>
   <table><thead><tr><th>Nome</th><th>Preço</th><th>Estoque</th><th>Status</th><th /></tr></thead><tbody>

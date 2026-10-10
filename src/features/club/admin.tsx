@@ -28,7 +28,7 @@ export function AdminPage() {
    supabase.from('redemptions').select('id,user_id,product_name,cost,status,created_at,pix_key').order('created_at', { ascending: false }),
    supabase.from('profiles').select('id,display_name,twitch_login,points').order('created_at', { ascending: false }).limit(100),
   ]);
-  setRedemptions(red ?? []); setProfiles(prof ?? []);
+  setRedemptions((red ?? []) as AdminRedemption[]); setProfiles(prof ?? []);
  };
  useEffect(() => { if (isAdmin) void load(); }, [isAdmin]);
 
